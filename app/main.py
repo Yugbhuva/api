@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-
+from app.api.v1.routes import items, analyze
 from app.core.config import get_settings
 from app.core.logger import setup_logging
 from app.api.v1.routes import items
@@ -50,6 +50,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(items.router, prefix="/api/v1")
+app.include_router(analyze.router, prefix="/api/v1")
 
 @app.get("/")
 async def root():
